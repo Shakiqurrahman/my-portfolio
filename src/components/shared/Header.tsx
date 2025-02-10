@@ -48,11 +48,7 @@ const Header = () => {
       </nav>
       <div className="flex items-center gap-4">
         <Link href={"/login"}>
-          <Button
-            size={"default"}
-            variant={"gray"}
-            className="text-sm sm:text-base"
-          >
+          <Button variant={"gray"} className="text-sm sm:text-base">
             Sign In
           </Button>
         </Link>

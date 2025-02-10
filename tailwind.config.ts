@@ -13,6 +13,7 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
         body: "#0f0f0f",
+        primary : "#0ef"
       },
       borderRadius: {
         lg: "var(--radius)",
