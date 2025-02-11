@@ -44,16 +44,15 @@ const projectDetails = async ({
   const project: IProjectData = data;
   return (
     <div className="max-width mt-12">
-      {/* {blog.thumbnail && <Image src={blog.thumbnail} alt={blog.title} />} */}
-      <Image
-        className="rounded-xl w-full sm:w-2/3"
-        src={
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEvrXbmYclgQUfJnXuSqYF8ZGrfSvwFjSM7Q&s"
-        }
-        alt={project.name}
-        width={600}
-        height={800}
-      />
+      {project.thumbnail && (
+        <Image
+          className="rounded-xl w-full sm:w-2/3"
+          src={project.thumbnail}
+          alt={project.name}
+          width={600}
+          height={800}
+        />
+      )}
       <h2 className="mt-4 mb-2 text-3xl font-semibold">{project.name}</h2>
       <div className="flex gap-3 text-sm text-blue-400">
         <Link

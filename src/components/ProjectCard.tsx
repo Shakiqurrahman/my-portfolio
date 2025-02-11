@@ -17,15 +17,15 @@ export interface IProjectData {
 const ProjectCard = ({ projectData }: { projectData: IProjectData }) => {
   return (
     <div className="p-4 bg-neutral-900 rounded-xl">
-      <Image
-        src={
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEvrXbmYclgQUfJnXuSqYF8ZGrfSvwFjSM7Q&s"
-        }
-        alt="thumbnail"
-        width={400}
-        height={300}
-        className="rounded-t-xl w-full"
-      />
+      {projectData.thumbnail && (
+        <Image
+          src={projectData.thumbnail}
+          alt="thumbnail"
+          width={400}
+          height={500}
+          className="rounded-t-xl w-full h-[200px]"
+        />
+      )}
       <h2 className="text-xl font-semibold my-2 line-clamp-2">
         {projectData.name}
       </h2>

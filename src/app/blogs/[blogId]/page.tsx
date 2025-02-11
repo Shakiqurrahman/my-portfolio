@@ -41,14 +41,15 @@ const blogDetailsPage = async ({
   const blog: IBlogCardData = data;
   return (
     <div className="max-width mt-12">
-      {/* {blog.thumbnail && <Image src={blog.thumbnail} alt={blog.title} />} */}
-      <Image
-        className="rounded-xl  w-full sm:w-2/3"
-        src={"https://images.pexels.com/photos/262508/pexels-photo-262508.jpeg"}
-        alt={blog.title}
-        width={600}
-        height={800}
-      />
+      {blog.thumbnail && (
+        <Image
+          src={blog.thumbnail}
+          alt={blog.title}
+          width={600}
+          height={800}
+          className="rounded-xl w-full sm:w-2/3"
+        />
+      )}
       <h2 className="mt-4 mb-2 text-3xl font-semibold">{blog.title}</h2>
       <p className="text-sm text-blue-400">
         Published by : {blog.author.name} | {dateFormatter(blog.createdAt)}
