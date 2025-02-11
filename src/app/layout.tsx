@@ -1,3 +1,4 @@
+import Footer from "@/components/shared/Footer";
 import Header from "@/components/shared/Header";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
@@ -24,6 +25,7 @@ export default function RootLayout({
       <body className={`${poppins.variable} antialiased`}>
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );

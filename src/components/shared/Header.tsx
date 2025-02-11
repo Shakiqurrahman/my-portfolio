@@ -11,6 +11,10 @@ const Header = () => {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
 
+  const handleClose = () => {
+    setIsOpen(false);
+  };
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -33,7 +37,7 @@ const Header = () => {
           } md:flex-row gap-8  duration-300`}
         >
           {navLinks.map(({ label, path }, idx) => (
-            <li key={idx}>
+            <li key={idx} onClick={handleClose}>
               <Link
                 href={path}
                 className={`hover:text-white duration-300 font-medium text-[15px] ${
