@@ -22,8 +22,6 @@ export async function generateMetadata({
   const res = await fetch(`${config.apiUrl}/blogs/${blogId}`);
   const { data: blog } = await res.json();
 
-  console.log(blog);
-
   return {
     title: blog?.title ? `${blog.title} | Shakiqur Rahman` : "Shakiqur Rahman",
     description: blog?.description,
@@ -45,7 +43,7 @@ const blogDetailsPage = async ({
     <div className="max-width mt-12">
       {/* {blog.thumbnail && <Image src={blog.thumbnail} alt={blog.title} />} */}
       <Image
-        className="rounded-xl w-2/3"
+        className="rounded-xl  w-full sm:w-2/3"
         src={"https://images.pexels.com/photos/262508/pexels-photo-262508.jpeg"}
         alt={blog.title}
         width={600}
