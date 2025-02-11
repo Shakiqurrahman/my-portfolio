@@ -25,8 +25,8 @@ export async function generateMetadata({
   const { data: projects } = await res.json();
 
   return {
-    title: projects?.title
-      ? `${projects.title} | Shakiqur Rahman`
+    title: projects?.name
+      ? `${projects?.name} | Shakiqur Rahman`
       : "Shakiqur Rahman",
     description: projects?.description,
   };

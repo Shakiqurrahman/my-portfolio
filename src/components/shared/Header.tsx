@@ -32,7 +32,7 @@ const Header = () => {
         <ul
           className={`md:flex ${
             isOpen
-              ? "flex flex-col absolute md:static top-20 md:top-0 bg-body/80 backdrop-blur-md w-full text-center left-0 py-10 md:py-0 h-screen md:h-auto"
+              ? "flex flex-col absolute md:static top-20 md:top-0 bg-body/80 backdrop-blur-md w-full text-center left-0 py-10 md:py-0 h-screen md:h-auto z-[9999]"
               : "hidden absolute md:static top-0"
           } md:flex-row gap-8  duration-300`}
         >
