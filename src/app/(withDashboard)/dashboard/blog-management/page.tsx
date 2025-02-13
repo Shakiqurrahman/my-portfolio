@@ -11,11 +11,11 @@ const BlogManagement = async () => {
   const blogs = response?.data;
   return (
     <div className="px-4 lg:px-10 my-16">
-      <div className="flex items-center justify-between gap-2 mb-8">
+      <div className="flex flex-wrap items-center justify-between gap-2 mb-8">
         <h1 className="text-2xl text-center font-semibold">Blog Management</h1>
         <Link href={"/dashboard/add-blog"}>
           <button className="px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600 transition duration-300">
-            Add Blog
+            Add New Blog
           </button>
         </Link>
       </div>

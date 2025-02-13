@@ -1,21 +1,52 @@
 "use client";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { getBlogById, updateBlog } from "@/utils/actions/blogActions";
+import { useParams, useRouter } from "next/navigation";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
-export interface BlogFormData {
-  title: string;
-  content: string;
-  authorName: string;
-  thumbnail: string;
+interface BlogFormData {
+  title?: string;
+  content?: string;
+  authorName?: string;
+  thumbnail?: string;
 }
 
-const AddBlogPage = () => {
+const UpdateBlogPage = () => {
+  const router = useRouter();
+  const { blogId } = useParams();
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState<BlogFormData>({
     title: "",
     content: "",
     authorName: "",
     thumbnail: "",
   });
+
+  useEffect(() => {
+    if (!blogId) return;
+    const fetchBlog = async (blogId: string) => {
+      setIsLoading(true);
+      try {
+        const data = await getBlogById(blogId);
+        // Update form data with the fetched blog data
+        if (data) {
+          setFormData({
+            title: data.title || "",
+            content: data.content || "",
+            authorName: data.authorName || "",
+            thumbnail: data.thumbnail || "",
+          });
+        }
+      } catch (error) {
+        console.error("Failed to fetch blog data", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchBlog(blogId as string);
+  }, [blogId]);
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -27,23 +58,24 @@ const AddBlogPage = () => {
     e.preventDefault();
 
     try {
-      // const res = await addBlog(formData);
-
-      // if (!res) {
-      //   toast.error("Failed to add blog");
-      // }
-
-      toast.success("Blog added successfully!");
-      setFormData({ title: "", content: "", authorName: "", thumbnail: "" });
+      const res = await updateBlog(blogId as string, formData);
+      if (!res) {
+        toast.error("Failed to update blog");
+        return;
+      }
+      if (res?.success) {
+        toast.success("Blog updated successfully!");
+        router.push("/dashboard/blog-management");
+      }
     } catch (error) {
       console.error("Error submitting blog:", error);
-      toast.error("Failed to add blog");
+      toast.error("Failed to update blog");
     }
   };
 
   return (
     <section className="px-4 lg:px-10 my-16">
-      <h1 className="text-2xl text-center font-semibold">Add Blog</h1>
+      <h1 className="text-2xl text-center font-semibold">Update Blog</h1>
       <form className="mt-8" onSubmit={handleSubmit}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
@@ -117,11 +149,16 @@ const AddBlogPage = () => {
           type="submit"
           className="mt-6 px-8 py-2.5 text-white bg-blue-500 rounded-md hover:bg-blue-600 transition duration-300"
         >
-          Submit
+          Update
         </button>
       </form>
+      {isLoading && (
+        <div className="flex justify-center items-center h-screen w-full fixed top-0 left-0 z-[99999999] backdrop-blur-sm">
+          <AiOutlineLoading3Quarters className="text-5xl animate-spin" />
+        </div>
+      )}
     </section>
   );
 };
 
-export default AddBlogPage;
+export default UpdateBlogPage;

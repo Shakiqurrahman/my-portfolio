@@ -16,6 +16,12 @@ export const addBlog = async (data: BlogFormData) => {
   return blogsInfo;
 };
 
+export const getBlogById = async (id: string) => {
+  const res = await fetch(`${config.apiUrl}/blogs/${id}`);
+  const blogInfo = await res.json();
+  return blogInfo?.data;
+};
+
 export const updateBlog = async (id: string, data: Partial<BlogFormData>) => {
   const res = await fetch(`${config.apiUrl}/blogs/${id}`, {
     method: "PATCH",

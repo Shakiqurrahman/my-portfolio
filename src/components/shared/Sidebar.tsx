@@ -1,6 +1,6 @@
 "use client";
 
-import { LogOutIcon } from "lucide-react";
+import { LogOutIcon, MessageSquare } from "lucide-react";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -68,6 +68,18 @@ const Sidebar = ({ toggleSidebar }: ISidebarProps) => {
           >
             <GoProject className="h-5 w-5" />
             <span>Project Management</span>
+          </Link>
+        </li>
+        <li>
+          <Link
+            onClick={toggleSidebar}
+            href="/dashboard/user-messages"
+            className={`flex items-center space-x-2 p-3 rounded-md hover:bg-gray-200 text-gray-700 duration-300 ${
+              pathname === "/dashboard/user-messages" ? "bg-gray-200" : ""
+            }`}
+          >
+            <MessageSquare className="h-5 w-5" />
+            <span>User Messages</span>
           </Link>
         </li>
       </ul>

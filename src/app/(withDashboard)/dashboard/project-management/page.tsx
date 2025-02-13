@@ -11,13 +11,13 @@ const ProjectManagement = async () => {
   const projectsData = response?.data;
   return (
     <div className="px-4 lg:px-10 my-16">
-      <div className="flex items-center justify-between gap-2 mb-8">
+      <div className="flex flex-wrap items-center justify-between gap-2 mb-8">
         <h1 className="text-2xl text-center font-semibold">
           Project Management
         </h1>
         <Link href={"/dashboard/add-project"}>
           <button className="px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600 transition duration-300">
-            Add Project
+            Add New Project
           </button>
         </Link>
       </div>

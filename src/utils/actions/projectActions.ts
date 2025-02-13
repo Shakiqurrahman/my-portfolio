@@ -16,6 +16,12 @@ export const addProject = async (data: IFormData) => {
   return projectsInfo;
 };
 
+export const getProjectById = async (id: string) => {
+  const res = await fetch(`${config.apiUrl}/projects/${id}`);
+  const projectInfo = await res.json();
+  return projectInfo?.data;
+};
+
 export const updateProject = async (id: string, data: Partial<IFormData>) => {
   const res = await fetch(`${config.apiUrl}/projects/${id}`, {
     method: "PATCH",
