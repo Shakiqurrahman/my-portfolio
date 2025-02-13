@@ -10,6 +10,7 @@ A robust platform for creating, editing, and managing blog, projects efficiently
 
 1. Blog Management ( Add, update, delete blog details. )
 2. Project Management ( Add, update, delete blog details. )
+2. User Messages
 3. Authentication & Authorization ( Social Media Authentication )
 4. Data validation ( Robust schema validation with Zod and ensures type safety )
 5. Code quality ( Enforced standards with ESLint and consistent code formatting with Prettier )
