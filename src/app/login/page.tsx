@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
 export type FormValues = {
   email: string;
@@ -26,14 +27,13 @@ const LoginPage = () => {
     try {
       const res = await loginUser(data);
       console.log(res);
-      if (res.accessToken) {
-        alert(res.message);
-        localStorage.setItem("accessToken", res.accessToken);
+      if (res?.data?.accessToken) {
+        toast.success("Login successful");
+        localStorage.setItem("accessToken", res?.data?.accessToken);
         router.push("/");
       }
     } catch (err: any) {
       console.error(err.message);
-      throw new Error(err.message);
     }
   };
 

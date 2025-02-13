@@ -1,5 +1,8 @@
+"use client";
+import { deleteProject } from "@/utils/actions/projectActions";
 import Image from "next/image";
 import Link from "next/link";
+import toast from "react-hot-toast";
 import { FaGithub } from "react-icons/fa";
 import { FiLink } from "react-icons/fi";
 import { Button } from "./ui/button";
@@ -14,7 +17,23 @@ export interface IProjectData {
   createdAt: string;
   updatedAt: string;
 }
-const ProjectCard = ({ projectData }: { projectData: IProjectData }) => {
+const ProjectCard = ({
+  projectData,
+  fromDashboard,
+}: {
+  projectData: IProjectData;
+  fromDashboard?: boolean;
+}) => {
+  const handleDelete = async (id: string) => {
+    try {
+      await deleteProject(id);
+
+      toast.success("Project deleted successfully!");
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to delete project. Please try again later.");
+    }
+  };
   return (
     <div className="p-4 bg-neutral-900 rounded-xl">
       {projectData.thumbnail && (
@@ -50,11 +69,33 @@ const ProjectCard = ({ projectData }: { projectData: IProjectData }) => {
           Live Link
         </Link>
       </div>
-      <Link href={`/projects/${projectData._id}`}>
-        <Button className="mt-4" variant="gray" size="lg">
-          View Details
-        </Button>
-      </Link>
+      {fromDashboard ? (
+        <div className="flex gap-4 justify-between">
+          <Link
+            className="w-full"
+            href={`/dashboard/update-project/${projectData._id}`}
+          >
+            <Button className="mt-4 w-full" variant="gray" size="lg">
+              Edit
+            </Button>
+          </Link>
+          <Button
+            onClick={() => handleDelete(projectData._id)}
+            type="button"
+            className="mt-4 w-full"
+            variant="gray"
+            size="lg"
+          >
+            Delete
+          </Button>
+        </div>
+      ) : (
+        <Link href={`/projects/${projectData._id}`}>
+          <Button className="mt-4" variant="gray" size="lg">
+            View Details
+          </Button>
+        </Link>
+      )}
     </div>
   );
 };

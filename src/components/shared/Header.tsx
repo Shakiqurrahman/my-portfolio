@@ -7,7 +7,14 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 
-const Header = () => {
+type UserProps = {
+  user?: {
+    name?: string | null | undefined;
+    email?: string | null | undefined;
+    image?: string | null | undefined;
+  };
+};
+const Header = ({ session }: { session: UserProps | null }) => {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -27,7 +34,9 @@ const Header = () => {
   }, [isOpen]);
   return (
     <header className="flex items-center justify-between h-20 max-width">
-      <h2 className="text-2xl font-bold">Portfolio</h2>
+      <Link href={"/"} className="text-2xl font-bold">
+        Portfolio
+      </Link>
       <nav>
         <ul
           className={`md:flex ${
@@ -51,11 +60,19 @@ const Header = () => {
         </ul>
       </nav>
       <div className="flex items-center gap-4">
-        <Link href={"/login"}>
-          <Button variant={"gray"} className="text-sm sm:text-base">
-            Sign In
-          </Button>
-        </Link>
+        {session?.user ? (
+          <Link href={"/dashboard"}>
+            <Button variant={"gray"} className="text-sm sm:text-base">
+              Dashboard
+            </Button>
+          </Link>
+        ) : (
+          <Link href={"/login"}>
+            <Button variant={"gray"} className="text-sm sm:text-base">
+              Sign In
+            </Button>
+          </Link>
+        )}
         <button
           type="button"
           className="bg-neutral-700 p-1.5 rounded-md block md:hidden"

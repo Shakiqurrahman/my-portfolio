@@ -52,7 +52,7 @@ const blogDetailsPage = async ({
       )}
       <h2 className="mt-4 mb-2 text-3xl font-semibold">{blog.title}</h2>
       <p className="text-sm text-blue-400">
-        Published by : {blog.author.name} | {dateFormatter(blog.createdAt)}
+        Published by : {blog.authorName} | {dateFormatter(blog.createdAt)}
       </p>
       <p className="mt-4 text-gray-300 text-justify">{blog.content}</p>
     </div>
