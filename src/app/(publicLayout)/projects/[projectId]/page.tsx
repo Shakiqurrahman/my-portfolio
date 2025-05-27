@@ -10,7 +10,7 @@ export const generateStaticParams = async () => {
   const { data: projects } = await res.json();
 
   return projects.slice(0, 3).map((project: IProjectData) => ({
-    projectId: project._id,
+    projectId: project.id,
   }));
 };
 
@@ -48,15 +48,15 @@ const projectDetails = async ({
         <Image
           className="rounded-xl w-full sm:w-2/3"
           src={project.thumbnail}
-          alt={project.name}
+          alt={project.title}
           width={600}
           height={800}
         />
       )}
-      <h2 className="mt-4 mb-2 text-3xl font-semibold">{project.name}</h2>
+      <h2 className="mt-4 mb-2 text-3xl font-semibold">{project.title}</h2>
       <div className="flex gap-3 text-sm text-blue-400">
         <Link
-          href={project.githubLink}
+          href={project.sourceLink || ""}
           className="flex items-center gap-1"
           target="_blank"
         >
@@ -64,7 +64,7 @@ const projectDetails = async ({
           Github
         </Link>
         <Link
-          href={project.liveLink}
+          href={project.liveLink || ""}
           className="flex items-center gap-1"
           target="_blank"
         >

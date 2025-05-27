@@ -8,7 +8,7 @@ export const generateStaticParams = async () => {
   const { data: blogs } = await res.json();
 
   return blogs.slice(0, 3).map((blog: IBlogCardData) => ({
-    blogId: blog._id,
+    blogId: blog.id,
   }));
 };
 
@@ -52,9 +52,9 @@ const blogDetailsPage = async ({
       )}
       <h2 className="mt-4 mb-2 text-3xl font-semibold">{blog.title}</h2>
       <p className="text-sm text-blue-400">
-        Published by : {blog.authorName} | {dateFormatter(blog.createdAt)}
+        Published by : Shakiqur Rahman | {dateFormatter(blog.createdAt)}
       </p>
-      <p className="mt-4 text-gray-300 text-justify">{blog.content}</p>
+      <p className="mt-4 text-gray-300 text-justify">{blog.description}</p>
     </div>
   );
 };

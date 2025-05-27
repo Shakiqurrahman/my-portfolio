@@ -13,7 +13,7 @@ const ProjectPage = async () => {
       <h2 className="text-3xl font-bold text-center mb-8">All Projects</h2>
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {projectsData?.map((project: IProjectData) => (
-          <ProjectCard key={project._id} projectData={project} />
+          <ProjectCard key={project.id} projectData={project} />
         ))}
       </div>
     </section>

@@ -1,20 +1,12 @@
 "use client";
 
 import { navLinks } from "@/utils/navLinkData";
-import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 
-type UserProps = {
-  user?: {
-    name?: string | null | undefined;
-    email?: string | null | undefined;
-    image?: string | null | undefined;
-  };
-};
-const Header = ({ session }: { session: UserProps | null }) => {
+const Header = () => {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -48,7 +40,7 @@ const Header = ({ session }: { session: UserProps | null }) => {
           {navLinks.map(({ label, path }, idx) => (
             <li key={idx} onClick={handleClose}>
               <Link
-                href={path}
+                href={path || ""}
                 className={`hover:text-white duration-300 font-medium text-[15px] ${
                   pathname === path ? "text-white" : "text-gray-300/85"
                 }`}
@@ -59,27 +51,12 @@ const Header = ({ session }: { session: UserProps | null }) => {
           ))}
         </ul>
       </nav>
-      <div className="flex items-center gap-4">
-        {session?.user ? (
-          <Link href={"/dashboard"}>
-            <Button variant={"gray"} className="text-sm sm:text-base">
-              Dashboard
-            </Button>
-          </Link>
-        ) : (
-          <Link href={"/login"}>
-            <Button variant={"gray"} className="text-sm sm:text-base">
-              Sign In
-            </Button>
-          </Link>
-        )}
-        <button
-          type="button"
-          className="bg-neutral-700 p-1.5 rounded-md block md:hidden"
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          {isOpen ? <X /> : <Menu />}
-        </button>
+      <div>
+        <Link href={"/contact"}>
+          <Button variant={"gray"} className="text-sm sm:text-base">
+            Contact Me
+          </Button>
+        </Link>
       </div>
     </header>
   );
