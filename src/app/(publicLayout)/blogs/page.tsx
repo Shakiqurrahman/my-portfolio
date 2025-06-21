@@ -3,7 +3,7 @@ import { config } from "@/config/config";
 
 const blogPage = async () => {
   const data = await fetch(`${config.apiUrl}/blogs`, {
-    cache: "no-store",
+    cache: "reload",
   });
   const response = await data.json();
 
